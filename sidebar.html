@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <style>
+        #valueDiv {
+            border-width: 1px;
+            border-style: solid;
+            width:80%;
+            aspect-ratio: 4/3;
+            margin-left: auto;
+            margin-right: auto; 
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .info {
+            text-align: center;
+            font-size: 16px;
+            margin: 4px 2px;
+        }
+
+        #cellValue {
+          background-color: #EEF;
+          font-size: 30px;
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center; 
+          align-items: center;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          word-break: break-word;
+        }
+
+        button {
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            margin-left: auto;
+            margin-right: auto; 
+        }
+
+        .alterButton {
+            width: 45%;
+            aspect-ratio: 4/3;
+            font-size: 25px;
+        }
+
+        #incrementButton {
+          background-color: green;
+        }
+
+        #decrementButton {
+          background-color: red;
+        }
+
+        #resetButton {
+          background-color: #333333;
+          width: 100%
+        }
+                
+        #alterValueDiv {
+            margin-left: auto;
+            margin-right: auto; 
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+        }
+          
+      </style>
+      <script>
+          function handleAlterValue(incrementAmount) {
+            google.script.run.withSuccessHandler(updateInfo).alterValue(incrementAmount);
+          }
+
+          function handleResetValue() {
+            google.script.run.withSuccessHandler(updateInfo).resetValue();
+          }
+
+          function updateInfo(info) {
+            document.getElementById('cellValue').innerHTML = info.value;
+            document.getElementById('cellA1').innerHTML = info.A1;
+          }   
+      </script>
+    </head>
+
+    <body>
+      <div id = "valueDiv"><p class='info' id='cellValue'>N/A</p></div>
+      <div><p class='info' id='cellA1'>N/A</p></div>
+      <br>
+      <div id='alterValueDiv'>
+        <button class='alterButton' id="incrementButton" onclick="handleAlterValue(1)">+</button>
+        <button class='alterButton' id="decrementButton" onclick="handleAlterValue(-1)">-</button>
+      </div>
+      <br>
+      <button id="resetButton" onclick="handleResetValue()">Reset</button>
+    </body>
+</html>
